@@ -1,19 +1,23 @@
 var express = require('express');
-var app     = express();
-var port  = 34200;
-var minify  = require('express-minify');
+var app = express();
 
-app.set('view engine','ejs');
+//setup app scope variables
+require('./app/globals')();
 
-app.get("/health",function(req,res){
-  res.send("Application is working correctly");
-});
+//grab routes and services
+var routes = require(_dir.DIR_APP + '/routes');
+var services = require(_dir.DIR_SERVICES);
+
+app.use(require('cookie-parser')());
+app.use(require('body-parser').urlencoded({ extended: true }));
 app.use(function (err, req, res, next) { 
   res.status(err.status || 500); res.send('error'); console.log(err); 
 });
-app.use('/assets', express.static(__dirname + '/assets'));
-app.get("/health",function(req,res){res.send("Application is up and running!!");})
-require('./routes.js')(app);
 
-var server  = app.listen(port)
-console.log('Listen on port number '+ port) 
+// load our routes and pass in our app and fully configured passport
+routes(app);
+
+// launch ======================================================================
+var port = _config.port;
+var server = app.listen(port);
+console.log('Your destiny lies on port ' + port);
