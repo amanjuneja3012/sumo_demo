@@ -1,21 +1,17 @@
 <html>
   <head>
-    <title>Events</title>
-    <link type="text/css" rel="stylesheet" href="/src/styles/materialize.min.css"></link>
-    <link type="text/css" rel="stylesheet"  href="/src/styles/articles.css"></link>
-    <link rel="icon" type="image/png" href="/src/images/favicon.png"/>
+    <title>BoilerPlate</title>
     <meta name='viewport' content='width=device-width' />
   </head>
   <body>
     <div class="parent_container">
       <div class="row">
-        <div class="col s12 m12 l12" style="margin-top: -1%;">
-          <div id="article_container" class="main_container">
+        <div class="col s12 m12 l12">
+          <div id="main" class="main_container">
         </div>
       </div>
     </div>
     <script type="text/javascript">
-      var DATA = <%-JSON.stringify(news)%>;
       WebFontConfig = {
         google: { families: [ 'Roboto:400,300,500:latin' ] }
       };
@@ -29,7 +25,7 @@
         s.parentNode.insertBefore(wf, s);
       })();
     </script>
-    <script type="text/javascript" src="/src/public/article.package-v16.js"></script>
+    <script type="text/javascript" src="/assets/public/main.js"></script>
   </body>
 <html>
 
