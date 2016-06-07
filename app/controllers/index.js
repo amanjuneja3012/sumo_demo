@@ -1,5 +1,7 @@
 var ajaxController = require('./ajax');
+var mainController = require('./main');
 
 module.exports = {
-    ajaxController: ajaxController
+    ajaxController: ajaxController,
+    mainController: mainController
 };

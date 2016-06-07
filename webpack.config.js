@@ -52,10 +52,10 @@ if (PROD) {
         },
         watch: watch,
         entry  :{
-          user_events: ['.app/assets/user_events/containers/main.jsx']
+          main: ['./app/src/main/containers/main.jsx']
         },
         output : {
-            path: path.join(__dirname,'assets/public/'),
+            path: path.join(__dirname,'app/dist/'),
             filename: '[name].[chunkhash].js',
             chunkFilename: '[name].[chunkhash].js'
         },
@@ -71,10 +71,10 @@ if (PROD) {
         },
         watch: watch,
         entry  :{
-          user_events: ['./assets/user_events/containers/main.jsx']
+           main: ['./app/src/main/containers/main.jsx']
         },
         output : {
-            path: path.join(__dirname,'assets/public/'),
+            path: path.join(__dirname,'app/dist/public/'),
             filename: '[name].bundle.js',
         },
         plugins: plugins,
