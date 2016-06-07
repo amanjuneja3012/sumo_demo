@@ -52,7 +52,7 @@ if (PROD) {
         },
         watch: watch,
         entry  :{
-          user_events: ['./assets/user_events/containers/main.jsx']
+          user_events: ['.app/assets/user_events/containers/main.jsx']
         },
         output : {
             path: path.join(__dirname,'assets/public/'),
