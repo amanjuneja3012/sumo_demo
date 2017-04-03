@@ -18,6 +18,5 @@ app.use(function (err, req, res, next) {
 routes(app);
 
 // launch ======================================================================
-var port = _config.port;
-var server = app.listen(port);
+var server = app.listen(process.env.PORT || 5000)
 console.log('Your destiny lies on port ' + port);
