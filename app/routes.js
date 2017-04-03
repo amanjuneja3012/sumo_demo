@@ -5,11 +5,8 @@ module.exports = function(app) {
 
     app.use('/dist/', express.static(__dirname + '/dist'));
     app.use('/ajax/', controllers.ajaxController);
-    app.use('/main/', controllers.mainController);
+    app.use('/', controllers.mainController);
     app.get("/health", function(req, res) {
         res.send("Application is up and running!!");
-    });
-    app.get("/*", function(req, res) {
-        res.send("*******************####*******************");
     });
 };

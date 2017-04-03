@@ -20,7 +20,7 @@ var loaders = [{
         test   : /\.jsx?$/,
         loaders: ['babel'],
         exclude: /node_modules/
-    },            
+    },
     {
         test: /\.css$/,
         loader: ExtractTextPlugin.extract("style-loader", "css-loader")
@@ -30,6 +30,10 @@ var loaders = [{
     {
         test: /\.less$/,
         loader: ExtractTextPlugin.extract("style-loader", "css-loader!less-loader")
+    },
+    {
+        test: /\.json$/,
+        loader: "json-loader"
     }
 ];
 
@@ -45,7 +49,7 @@ if (PROD) {
             }
         })
     );
-    watch=false;
+    watch=true;
     config = {
         module : {
             loaders:loaders
@@ -69,7 +73,7 @@ if (PROD) {
         module : {
             loaders:loaders
         },
-        watch: watch,
+        watch: true,
         entry  :{
            main: ['./app/src/main/containers/main.jsx']
         },
@@ -82,6 +86,6 @@ if (PROD) {
             extensions: ['', '.js','.jsx']
         }
     };
-}  
+}
 
 module.exports = config;
