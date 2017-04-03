@@ -19,4 +19,3 @@ routes(app);
 
 // launch ======================================================================
 var server = app.listen(process.env.PORT || 5000)
-console.log('Your destiny lies on port ' + port);
