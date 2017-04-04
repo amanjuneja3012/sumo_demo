@@ -14,9 +14,10 @@ export function close_modal() {
   }
 }
 
-export function runSearch(event,type){
+export function runSearch(event,type,selected_team){
+  debugger
   var string = event.target.value;
-  var result = processAndTriggerSearch(string,type);
+  var result = processAndTriggerSearch(string,type,selected_team);
   return{
     type:types.UPDATE_RESULTS,
     data:(type=='team')?result.map((el)=>{return el[type]}):result,

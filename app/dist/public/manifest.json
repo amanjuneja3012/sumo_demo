@@ -1,6 +1,6 @@
 {
-  "main.js": "main.bundle.js",
-  "main.js.map": "main.bundle.js.map",
   "main.css": "main.css",
-  "main.css.map": "main.css.map"
+  "main.css.map": "main.css.map",
+  "main.js": "main.bundle.js",
+  "main.js.map": "main.bundle.js.map"
 }

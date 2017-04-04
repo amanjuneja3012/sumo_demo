@@ -7,10 +7,12 @@ const fullData = [
 	{team: 'Sales', employees: ['Ankit Jain', 'Anjali Maulingkar']}
 ]
 
-export function processAndTriggerSearch(string,type,selected_team){
+export function processAndTriggerSearch(input_string,type,selected_team){
+	debugger
 	var searchResult = [];
-	if(string.length==0 && (last_search.length>0)){
-			searchResult = [];
+	var string = input_string.trim();
+	if(string.length==0){
+			searchResult = search(type,string,fullData,selected_team);
 			SearchCache.resetCache();
 	}
 	else if(string.length==1){
@@ -63,6 +65,7 @@ function search(type,string,dataSet,selected_team){
 		target = fullData;
 	}
 	if(!string.length){
+		debugger
 		if(type=='team'){
 			return dataSet.filter(function(dataRow){
 				return true;
@@ -98,13 +101,15 @@ function search(type,string,dataSet,selected_team){
 }
 
 function fetchTeam(array){
+	var team = '';
 	fullData.forEach((obj)=>{
 		obj.employees.forEach((employee)=>{
 			array.forEach((el)=>{
 				if(el==employee){
-					return obj.team;
+					team = obj.team;
 				}
 			})
 		})
 	})
+	return team;
 }

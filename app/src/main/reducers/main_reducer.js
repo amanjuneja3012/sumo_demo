@@ -4,7 +4,7 @@ const initialState = {
   modal_state: 0,
   send_email: false,
   results:[],
-  autocomplete_type:'team',
+  autocomplete_type:'',
   selected_team:''
 };
 
