@@ -10,8 +10,8 @@ var services = require(_dir.DIR_SERVICES);
 
 app.use(require('cookie-parser')());
 app.use(require('body-parser').urlencoded({ extended: true }));
-app.use(function (err, req, res, next) { 
-  res.status(err.status || 500); res.send('error'); console.log(err); 
+app.use(function (err, req, res, next) {
+  res.status(err.status || 500); res.send('error'); console.log(err);
 });
 
 // load our routes and pass in our app and fully configured passport

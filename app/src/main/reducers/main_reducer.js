@@ -4,7 +4,8 @@ const initialState = {
   modal_state: 0,
   send_email: false,
   results:[],
-  autocomplete_type:'team'
+  autocomplete_type:'team',
+  selected_team:''
 };
 
 export default function main_reducer(state = initialState, action) {
@@ -19,6 +20,11 @@ export default function main_reducer(state = initialState, action) {
         return{
           ...state,
           modal_state: 0
+        }
+      case types.FILTER_DATA:
+        return{
+          ...state,
+          selected_team:action.suggestion
         }
       case types.UPDATE_RESULTS:
         debugger

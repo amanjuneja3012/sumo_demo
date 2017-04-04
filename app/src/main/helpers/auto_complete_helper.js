@@ -2,21 +2,23 @@ var last_search = '';
 var SearchCache = new cache
 const fullData = [
 	{team: 'Engineering', employees: ['Lawana Fan', 'Larry Rainer', 'Rahul Malik','Leah Shumway']},
-	{team: 'Executive', employees: ['Rohan Gupta', 'Ronda Dean', 'Robby Maharaj']},   {team: 'Finance', employees: ['Caleb Brown', 'Carol Smithson', 'Carl Sorensen']},   {team: 'Sales', employees: ['Ankit Jain', 'Anjali Maulingkar']}
+	{team: 'Executive', employees: ['Rohan Gupta', 'Ronda Dean', 'Robby Maharaj']},
+	{team: 'Finance', employees: ['Caleb Brown', 'Carol Smithson', 'Carl Sorensen']},
+	{team: 'Sales', employees: ['Ankit Jain', 'Anjali Maulingkar']}
 ]
 
-export function processAndTriggerSearch(string,type){
+export function processAndTriggerSearch(string,type,selected_team){
 	var searchResult = [];
 	if(string.length==0 && (last_search.length>0)){
 			searchResult = [];
 			SearchCache.resetCache();
 	}
 	else if(string.length==1){
-			searchResult = search(type,string,fullData);
+			searchResult = search(type,string,fullData,selected_team);
 			SearchCache.setCacheData(1,searchResult);
 	}
 	else if( last_search.length < string.length ){
-		searchResult = search(type,string,SearchCache.getCacheData(string.length-1));
+		searchResult = search(type,string,SearchCache.getCacheData(string.length-1),selected_team);
 		SearchCache.setCacheData(string.length,searchResult);
 	}
 	else{
@@ -26,11 +28,10 @@ export function processAndTriggerSearch(string,type){
 			SearchCache.clearCacheData(string.length);
 		}
 		else{
-			search(type,string,SearchCache.getCacheData(1));
+			search(type,string,SearchCache.getCacheData(1),selected_team);
 		}
 	}
 	last_search = string;
-	console.log(searchResult);
 	return searchResult;
 }
 
@@ -56,12 +57,29 @@ function cache (){
 	}
 }
 
-function search(type,string,dataSet){
+function search(type,string,dataSet,selected_team){
 	var target = dataSet;
 	if(!(dataSet &&dataSet.length)){
 		target = fullData;
 	}
-	if(type=='team'){
+	if(!string.length){
+		if(type=='team'){
+			return dataSet.filter(function(dataRow){
+				return true;
+			})
+		}
+		else if(type=='employees'){
+			var result = dataSet.map(function(dataRow){
+				var target = (dataRow.hasOwnProperty('employees'))?dataRow[type]:dataRow
+				var final_arr = target.filter(function(str){
+					return true;
+				})
+				return final_arr;
+			})
+			return result;
+		}
+	}
+	else if(type=='team'){
 		return dataSet.filter(function(dataRow){
 			return (dataRow[type].toLowerCase().indexOf(string.toLowerCase())>-1)
 		})
@@ -69,12 +87,24 @@ function search(type,string,dataSet){
 	else if(type=='employees'){
 		var result = dataSet.map(function(dataRow){
 			var target = (dataRow.hasOwnProperty('employees'))?dataRow[type]:dataRow
+			var team = (dataRow.hasOwnProperty('team'))?dataRow.team:fetchTeam(target);
 			var final_arr = target.filter(function(str){
-				debugger
-				return (str.toLowerCase().indexOf(string.toLowerCase())>-1)
+				return ((str.toLowerCase().indexOf(string.toLowerCase())>-1)&&(team==selected_team))
 			})
 			return final_arr;
 		})
-		return result
+		return result;
 	}
+}
+
+function fetchTeam(array){
+	fullData.forEach((obj)=>{
+		obj.employees.forEach((employee)=>{
+			array.forEach((el)=>{
+				if(el==employee){
+					return obj.team;
+				}
+			})
+		})
+	})
 }

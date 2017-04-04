@@ -23,3 +23,10 @@ export function runSearch(event,type){
     autocomplete_type:type
   }
 }
+
+export function filter_data(suggestion){
+  return{
+    type:types.FILTER_DATA,
+    suggestion:suggestion
+  }
+}
